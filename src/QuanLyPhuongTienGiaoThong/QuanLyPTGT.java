@@ -22,7 +22,7 @@ public class QuanLyPTGT extends javax.swing.JFrame {
 
     public QuanLyPTGT() {
         initComponents(); // commit
-        myInit();
+        myInit(); // Code hay lam
     }
 
     @SuppressWarnings("unchecked")
