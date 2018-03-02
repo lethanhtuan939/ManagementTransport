@@ -21,7 +21,7 @@ public class QuanLyPTGT extends javax.swing.JFrame {
     private int selectedIndex = -1;
 
     public QuanLyPTGT() {
-        initComponents();
+        initComponents(); // commit
         myInit();
     }
 
