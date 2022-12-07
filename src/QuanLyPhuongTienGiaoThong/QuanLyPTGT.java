@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JComboBox;
+import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import javax.swing.table.DefaultTableModel;
 
@@ -56,6 +57,7 @@ public class QuanLyPTGT extends javax.swing.JFrame {
         btnTimKiemGanDung = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         tblPhuongTiens = new javax.swing.JTable();
+        btnReset = new javax.swing.JButton();
         jLabel11 = new javax.swing.JLabel();
         txtTuKhoaTimKiem = new javax.swing.JTextField();
 
@@ -173,6 +175,13 @@ public class QuanLyPTGT extends javax.swing.JFrame {
         });
         jScrollPane1.setViewportView(tblPhuongTiens);
 
+        btnReset.setText("Làm mới");
+        btnReset.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnResetActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -182,13 +191,15 @@ public class QuanLyPTGT extends javax.swing.JFrame {
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(49, 49, 49)
                         .addComponent(btnThem)
-                        .addGap(103, 103, 103)
+                        .addGap(55, 55, 55)
                         .addComponent(btnXoa)
-                        .addGap(126, 126, 126)
-                        .addComponent(btnCapNhat)
+                        .addGap(55, 55, 55)
+                        .addComponent(btnReset)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(btnCapNhat)
+                        .addGap(49, 49, 49)
                         .addComponent(btnTimKiem)
-                        .addGap(86, 86, 86)
+                        .addGap(53, 53, 53)
                         .addComponent(btnTimKiemGanDung)
                         .addGap(38, 38, 38))
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 934, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -203,7 +214,8 @@ public class QuanLyPTGT extends javax.swing.JFrame {
                     .addComponent(btnXoa)
                     .addComponent(btnCapNhat)
                     .addComponent(btnTimKiem)
-                    .addComponent(btnTimKiemGanDung))
+                    .addComponent(btnTimKiemGanDung)
+                    .addComponent(btnReset))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 22, Short.MAX_VALUE)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 301, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
@@ -405,11 +417,14 @@ public class QuanLyPTGT extends javax.swing.JFrame {
     private void btnXoaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnXoaActionPerformed
         //Đảm bảo có dòng được chọn để xóa
         if (selectedIndex != -1) {
-            // Xóa dữ liệu tại dòng được chọn trong model
+            int option = JOptionPane.showConfirmDialog(this, "Xóa phương tiện này");
+           if(option == 0) {
+                // Xóa dữ liệu tại dòng được chọn trong model
             mdTblPhuongTien.removeRow(selectedIndex);
             //Xóa dữ liệu trong phuongTiens
             phuongTiens.remove(selectedIndex);
             //Trả về trạng thái chưa có dòng nào được chọn.
+           }
         }
     }//GEN-LAST:event_btnXoaActionPerformed
 
@@ -537,12 +552,28 @@ public class QuanLyPTGT extends javax.swing.JFrame {
 
         }
     }//GEN-LAST:event_btnTimKiemGanDungActionPerformed
+
+    private void btnResetActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnResetActionPerformed
+        // TODO add your handling code here:
+        cboLoaiPhuongTien.setSelectedIndex(0);
+        cboHangSanXuat.setSelectedIndex(0);
+        cboNamSanXuat.setSelectedIndex(0);
+        txtGiaBan.setText("");
+        cboMau.setSelectedIndex(0);
+        cboSoChoNgoi.setSelectedIndex(0);
+        txtKieuDongCo.setText("");
+        txtTuKhoaTimKiem.setText("");
+        txtTrongTai.setText("");
+        txtCongSuat.setText("");
+        
+        loadDataIntoTable();
+    }//GEN-LAST:event_btnResetActionPerformed
     // Nạp dữ liệu lại vào các cbo
     private void setSelectedItemsForCbo(int row, int col, JComboBox cbo) {
         String duLieuTaiODuocChon = mdTblPhuongTien.getValueAt(row, col).toString();
         // Duyệ qua tất cả các phần tử của cbo
         for (int i = 0; i < cbo.getItemCount(); i++) {
-            // Nếu phần tử napf trùng với dữ liệu tại ô được chọn 
+            // Nếu phần tử nap trùng với dữ liệu tại ô được chọn 
             if (cbo.getItemAt(i).toString().equalsIgnoreCase(duLieuTaiODuocChon)) {
                 cbo.setSelectedIndex(i);// Thiết lập chọn                
                 return;// Thoát khỏi hàm
@@ -594,6 +625,7 @@ public class QuanLyPTGT extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnCapNhat;
+    private javax.swing.JButton btnReset;
     private javax.swing.JButton btnThem;
     private javax.swing.JButton btnTimKiem;
     private javax.swing.JButton btnTimKiemGanDung;
@@ -681,7 +713,6 @@ public class QuanLyPTGT extends javax.swing.JFrame {
                 soChoNgoi,
                 congSuat,
                 trongTai,});
-
         }
     }
 
